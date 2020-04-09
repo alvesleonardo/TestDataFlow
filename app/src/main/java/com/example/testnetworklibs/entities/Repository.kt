@@ -22,14 +22,14 @@ data class Repository(
 	@field:JsonProperty("subscription_url")
 	val subscriptionUrl: String? = null,
 
+	@field:JsonProperty("keys_url")
+	val keysUrl: String? = null,
+
 	@field:JsonProperty("branches_url")
 	val branchesUrl: String? = null,
 
 	@field:JsonProperty("deployments_url")
 	val deploymentsUrl: String? = null,
-
-	@field:JsonProperty("keys_url")
-	val keysUrl: String? = null,
 
 	@field:JsonProperty("issue_comment_url")
 	val issueCommentUrl: String? = null,
@@ -52,9 +52,6 @@ data class Repository(
 	@field:JsonProperty("id")
 	val id: Int? = null,
 
-	@field:JsonProperty("git_url")
-	val gitUrl: String? = null,
-
 	@field:JsonProperty("owner")
 	val owner: Owner? = null,
 
@@ -67,11 +64,11 @@ data class Repository(
 	@field:JsonProperty("git_refs_url")
 	val gitRefsUrl: String? = null,
 
-	@field:JsonProperty("compare_url")
-	val compareUrl: String? = null,
-
 	@field:JsonProperty("forks_url")
 	val forksUrl: String? = null,
+
+	@field:JsonProperty("compare_url")
+	val compareUrl: String? = null,
 
 	@field:JsonProperty("statuses_url")
 	val statusesUrl: String? = null,
@@ -81,9 +78,6 @@ data class Repository(
 
 	@field:JsonProperty("blobs_url")
 	val blobsUrl: String? = null,
-
-	@field:JsonProperty("ssh_url")
-	val sshUrl: String? = null,
 
 	@field:JsonProperty("git_tags_url")
 	val gitTagsUrl: String? = null,
@@ -135,6 +129,9 @@ data class Repository(
 
 	@field:JsonProperty("pulls_url")
 	val pullsUrl: String? = null,
+
+	@field:JsonProperty("hooks_url")
+	val hooksUrl: String? = null,
 
 	@field:JsonProperty("assignees_url")
 	val assigneesUrl: String? = null,

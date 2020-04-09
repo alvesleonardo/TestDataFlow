@@ -1,2 +1,3 @@
 rootProject.name='Test Network libs'
 include ':app'
+include ':app:temrecyclertools'

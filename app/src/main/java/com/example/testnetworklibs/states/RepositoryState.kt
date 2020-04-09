@@ -1,6 +1,5 @@
 package com.example.testnetworklibs.states
 
-import com.example.testnetworklibs.entities.Repository
-import io.uniflow.core.flow.data.UIState
+import com.example.testnetworklibs.ui.RepositoryViewModel
 
-class RepositoryState(repos: List<Repository>) : ResultState<List<Repository>>(repos)
+class RepositoryState(repos: List<RepositoryViewModel>) : ResultState<List<RepositoryViewModel>>(repos)
