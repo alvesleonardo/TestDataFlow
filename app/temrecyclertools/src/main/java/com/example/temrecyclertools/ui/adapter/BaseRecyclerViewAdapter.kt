@@ -8,17 +8,17 @@ import androidx.recyclerview.widget.RecyclerView
 interface BaseRecyclerEntity
 
 interface ViewHolderFactory {
-    fun getType(baseRecyclerEntity: BaseRecyclerEntity): Int
+    fun getType(recyclerEntity: BaseRecyclerEntity): Int
     fun getHolder(viewType: Int, view: View): BaseRecyclerViewHolder<*>
 }
 
 abstract class BaseRecyclerViewHolder<in T : BaseRecyclerEntity>(itemView: View) :
     RecyclerView.ViewHolder(itemView) {
     interface Listener<T> {
-        fun onClick(viewModel: T)
+        fun onClick(recyclerEntity: T)
     }
 
-    abstract fun bind(viewModel: T)
+    abstract fun bind(recyclerEntity: T)
     abstract fun recycle()
 }
 
@@ -98,6 +98,11 @@ class BaseRecyclerViewAdapter(private val viewHolderFactory: ViewHolderFactory) 
 
     fun <R : BaseRecyclerEntity> getItemFromType(kClass: Class<R>): List<R> {
         return items.filterIsInstance(kClass)
+    }
+
+    fun clear() {
+        items.clear()
+        notifyDataSetChanged()
     }
 
 }

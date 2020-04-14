@@ -2,12 +2,12 @@ package com.example.temrecyclertools.ui.adapter
 
 import android.view.View
 import com.example.temrecyclertools.ui.viewHolder.LoadingViewHolder
-import com.example.temrecyclertools.ui.viewHolder.LoadingViewModel
+import com.example.temrecyclertools.ui.viewHolder.LoadingRecyclerEntity
 import com.example.temrecyclertools.ui.viewHolder.RECYCLERVIEW_LOADING_LAYOUT_ID
 
 val loadingViewAdapter = BaseRecyclerViewAdapter(object : ViewHolderFactory {
     override fun getType(baseRecyclerEntity: BaseRecyclerEntity): Int = when (baseRecyclerEntity) {
-        is LoadingViewModel -> RECYCLERVIEW_LOADING_LAYOUT_ID
+        is LoadingRecyclerEntity -> RECYCLERVIEW_LOADING_LAYOUT_ID
         else -> throw IllegalArgumentException()
     }
 

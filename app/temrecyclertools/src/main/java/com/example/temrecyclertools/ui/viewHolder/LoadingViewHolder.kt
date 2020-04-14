@@ -7,10 +7,9 @@ import com.example.temrecyclertools.ui.adapter.BaseRecyclerViewHolder
 
 val RECYCLERVIEW_LOADING_LAYOUT_ID = view_loading
 
-class LoadingViewHolder(itemView: View) : BaseRecyclerViewHolder<LoadingViewModel>(itemView) {
-    override fun bind(viewModel: LoadingViewModel) {}
-
+class LoadingViewHolder(itemView: View) : BaseRecyclerViewHolder<LoadingRecyclerEntity>(itemView) {
+    override fun bind(viewModel: LoadingRecyclerEntity) {}
     override fun recycle() {}
 }
 
-class LoadingViewModel: BaseRecyclerEntity
+class LoadingRecyclerEntity: BaseRecyclerEntity
