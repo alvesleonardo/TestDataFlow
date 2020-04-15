@@ -1,11 +1,16 @@
 package com.example.temrecyclertools.ui.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 
-interface BaseRecyclerEntity
+interface BaseRecyclerEntity {
+    fun getItemId(): Any
+}
 
 interface ViewHolderFactory {
     fun getType(recyclerEntity: BaseRecyclerEntity): Int
@@ -26,7 +31,6 @@ class BaseRecyclerViewAdapter(private val viewHolderFactory: ViewHolderFactory) 
     RecyclerView.Adapter<BaseRecyclerViewHolder<BaseRecyclerEntity>>() {
 
     private var recyclerView: RecyclerView? = null
-
     private val items = arrayListOf<BaseRecyclerEntity>()
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
@@ -105,4 +109,58 @@ class BaseRecyclerViewAdapter(private val viewHolderFactory: ViewHolderFactory) 
         notifyDataSetChanged()
     }
 
+}
+
+class BaseRecyclerPageViewAdapter(private val viewHolderFactory: ViewHolderFactory) :
+    PagedListAdapter<BaseRecyclerEntity, BaseRecyclerViewHolder<BaseRecyclerEntity>>(diff) {
+
+    private var recyclerView: RecyclerView? = null
+
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+        super.onAttachedToRecyclerView(recyclerView)
+        this.recyclerView = recyclerView
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): BaseRecyclerViewHolder<BaseRecyclerEntity> {
+        val view = LayoutInflater.from(parent.context).inflate(viewType, parent, false)
+        return viewHolderFactory.getHolder(
+            viewType,
+            view
+        ) as BaseRecyclerViewHolder<BaseRecyclerEntity>
+    }
+
+    override fun onBindViewHolder(
+        holderBaseRecycler: BaseRecyclerViewHolder<BaseRecyclerEntity>,
+        position: Int
+    ) {
+        getItem(position)?.let { holderBaseRecycler.bind(it) }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        getItem(position)?.let { return viewHolderFactory.getType(it) }
+        return 0
+    }
+
+    override fun onViewRecycled(holderBaseRecycler: BaseRecyclerViewHolder<BaseRecyclerEntity>) {
+        holderBaseRecycler.recycle()
+    }
+
+    companion object {
+        val diff = object : DiffUtil.ItemCallback<BaseRecyclerEntity>() {
+            override fun areItemsTheSame(
+                oldItem: BaseRecyclerEntity,
+                newItem: BaseRecyclerEntity
+            ): Boolean = oldItem.getItemId() == newItem.getItemId()
+
+            @SuppressLint("DiffUtilEquals")
+            override fun areContentsTheSame(
+                oldItem: BaseRecyclerEntity,
+                newItem: BaseRecyclerEntity
+            ): Boolean = oldItem == newItem
+        }
+    }
 }

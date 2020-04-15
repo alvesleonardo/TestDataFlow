@@ -13,7 +13,7 @@ import retrofit2.converter.jackson.JacksonConverterFactory
 
 val networkModule = module {
     single { OkHttpClient.Builder().build() }
-    single { RetrofitBuilder.createWebService<GithubApi>(get(), "https://api.github.com/") }
+    single { RetrofitBuilder.createWebService<GithubApi>(get(), "https://rickandmortyapi.com/api/") }
     single { GitHubRepoRepository(get()) }
 }
 
